@@ -4,7 +4,7 @@ set -eu
 
 echo "INFO: start"
 
-if [ -z "$CHECK_URL" ]; then
+if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL/start
 
   trap "curl -fsS --retry 3 $CHECK_URL/fail" ERR
@@ -24,7 +24,7 @@ echo "INFO: umount"
 
 umount /mnt/src
 
-if [ -z "$CHECK_URL" ]; then
+if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL
 fi
 
