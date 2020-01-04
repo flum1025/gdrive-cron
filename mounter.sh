@@ -5,7 +5,7 @@ set -eu
 echo "INFO: start"
 
 if [ -n "$CHECK_URL" ]; then
-  curl -fsS --retry 3 $CHECK_URL/start
+  curl -fsS --retry 3 $CHECK_URL/start && echo
 
   function error_handler() {
     echo "ERROR" >&2
