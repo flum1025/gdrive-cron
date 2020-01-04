@@ -7,7 +7,13 @@ echo "INFO: start"
 if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL/start
 
-  trap "curl -fsS --retry 3 $CHECK_URL/fail" ERR
+  function error_handler() {
+    echo "ERROR" >&2
+    curl -fsS --retry 3 $CHECK_URL/fail && echo
+    exit 1
+  }
+
+  trap error_handler ERR
 fi
 
 echo "INFO: google-drive-ocamlfuse mount"
@@ -25,7 +31,7 @@ echo "INFO: umount"
 umount /mnt/src
 
 if [ -n "$CHECK_URL" ]; then
-  curl -fsS --retry 3 $CHECK_URL
+  curl -fsS --retry 3 $CHECK_URL && echo
 fi
 
 echo "INFO: end"
