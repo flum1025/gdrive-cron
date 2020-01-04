@@ -12,7 +12,7 @@ COPY --from=build /root/.opam/default/bin/google-drive-ocamlfuse /bin/google-dri
 
 RUN apk add --no-cache sqlite-libs fuse libcurl libgmpxx tzdata tar pigz jq && \
   mkdir -p /mnt/src && \
-  echo -e "#! /bin/sh\necho $* > /dev/stderr" >> /bin/firefox && \
+  echo -e "#! /bin/sh\necho \$* > /dev/stderr" >> /bin/firefox && \
   chmod +x /bin/firefox && \
   echo "* * * * * echo 'sample cron'" > /var/spool/cron/crontabs/root
 

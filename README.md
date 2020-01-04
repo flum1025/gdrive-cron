@@ -5,7 +5,7 @@ Authorization
 ---
 
 ```bash
-$ docker run -it --rm $(pwd)/config:/root/.gdfuse/default flum1025/gdrive-cron google-drive-ocamlfuse
+$ docker run -it --rm -v $(pwd)/config:/root/.gdfuse/default flum1025/gdrive-cron google-drive-ocamlfuse
 ```
 
 Usage
