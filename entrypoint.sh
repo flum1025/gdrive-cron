@@ -1,13 +1,12 @@
 #! /bin/sh
 
-if [[ -f /cron.json ]]; then
-  echo "INFO: found /cron.json"
-  cat /cron.json
-  cat /cron.json | jq -r '.[] | .cron + " /mounter.sh \"" + .command + "\""' > /var/spool/cron/crontabs/root
+if [ ! -z "$CRON" ]; then
+  echo "$CRON /mounter.sh \"$COMMAND\"" > /var/spool/cron/crontabs/root
 else
-  echo "WARN: /cron.json is not found."
+  echo "FATAL: \$CRON not found"
+  exit 1
 fi
 
 cat /var/spool/cron/crontabs/root
 
-crond -l 2 -f
+crond -l 2 -f -L /dev/stdout

@@ -12,19 +12,11 @@ Usage
 ---
 
 ```bash
-$ docker run --privileged -it --rm -v $(pwd)/config:/root/.gdfuse/default -v $(pwd)/cron.json:/cron.json flum1025/gdrive-cron
-```
-
-Configure
----
-
-Prepare file `cron.json`
-
-```json
-[
-  {
-    "cron": "* * * * *",
-    "command": "echo $(date '+%Y%m%d%H%M%S') >> /mnt/src/hoge"
-  }
-]
+$ docker run \
+  --privileged \
+  -v $(pwd)/config:/root/.gdfuse/default \
+  -e "CRON=* * * * *" \
+  -e "CHECK_URL=hoge" \
+  -e "COMMAND=echo $(date '+%Y%m%d%H%M%S') >> /mnt/src/hoge" \
+  flum1025/gdrive-cron
 ```

@@ -10,7 +10,7 @@ FROM alpine
 
 COPY --from=build /root/.opam/default/bin/google-drive-ocamlfuse /bin/google-drive-ocamlfuse
 
-RUN apk add --no-cache sqlite-libs fuse libcurl libgmpxx tzdata tar pigz jq && \
+RUN apk add --no-cache sqlite-libs fuse libcurl libgmpxx tzdata tar pigz jq curl && \
   mkdir -p /mnt/src && \
   echo -e "#! /bin/sh\necho \$* > /dev/stderr" >> /bin/firefox && \
   chmod +x /bin/firefox && \
