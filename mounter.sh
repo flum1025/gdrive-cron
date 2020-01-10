@@ -47,9 +47,9 @@ for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
   echo "INFO: complete $file to $cloud_path/$name.tgz"
 done
 
-ls $SAVE_DIR_CURRENT
+echo "INFO: Remove $SAVE_DIR_CURRENT"
+
 rm -rf $SAVE_DIR_CURRENT
-ls $SAVE_DIR_CURRENT
 
 if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL && echo
