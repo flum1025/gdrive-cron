@@ -30,7 +30,7 @@ for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
   name=$(basename $file)
   dirname=$(dirname $file)
   target_filename=$SAVE_DIR_CURRENT/$name.tgz
-  cloud_path=$TARGET_DIR/$DATE/$name.tgz
+  cloud_path=$TARGET_DIR/$DATE
 
   echo "INFO: -----tar export-----"
   tar cf $target_filename --use-compress-prog=pigz -C $dirname $name && :
@@ -42,9 +42,11 @@ for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
     exit $code
   fi
 
+  echo "INFO: start rclone"
+
   rclone copy $target_filename gdrive:$cloud_path
 
-  echo "INFO: complete $file to $cloud_path"
+  echo "INFO: complete $file to $cloud_path/$name.tgz"
 done
 
 echo "INFO: end callback"
