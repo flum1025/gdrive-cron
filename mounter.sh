@@ -22,8 +22,6 @@ SAVE_DIR_CURRENT="/tmp/$DATE"
 
 mkdir $SAVE_DIR_CURRENT
 
-echo "INFO: call callback"
-
 for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
   echo "INFO: backup $file"
 
@@ -49,7 +47,9 @@ for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
   echo "INFO: complete $file to $cloud_path/$name.tgz"
 done
 
-echo "INFO: end callback"
+ls $SAVE_DIR_CURRENT
+rm -rf $SAVE_DIR_CURRENT
+ls $SAVE_DIR_CURRENT
 
 if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL && echo
