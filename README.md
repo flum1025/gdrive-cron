@@ -1,11 +1,11 @@
-docker google-drive-ocamlfuse
+gdrive-cron
 ===
 
 Authorization
 ---
 
 ```bash
-$ docker run -it --rm -v $(pwd)/config:/root/.gdfuse/default flum1025/gdrive-cron google-drive-ocamlfuse
+$ docker run -it --rm -v $(pwd)/config:/root/.config/rclone flum1025/gdrive-cron:20200110223857 rclone config
 ```
 
 Usage
@@ -14,9 +14,9 @@ Usage
 ```bash
 $ docker run \
   --privileged \
-  -v $(pwd)/config:/root/.gdfuse/default \
+  -v $(pwd)/config:/root/.config/rclone \
   -e "CRON=* * * * *" \
-  -e "CHECK_URL=hoge" \
-  -e "COMMAND=echo $(date '+%Y%m%d%H%M%S') >> /mnt/src/hoge" \
+  -e "CHECK_URL=healthchecks.io url" \
+  -e "TARGET_DIR=path/to/backup/dir/in/google/drive"
   flum1025/gdrive-cron
 ```

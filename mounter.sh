@@ -44,12 +44,16 @@ for file in `\find $SOURCE_DIR -maxdepth 1 -type d ! -path $SOURCE_DIR`; do
 
   rclone copy $target_filename gdrive:$cloud_path
 
-  echo "INFO: complete $file to $cloud_path/$name.tgz"
+  echo "INFO: complete copy $file to $cloud_path/$name.tgz"
+
+  echo "INFO: Remove $target_filename"
+
+  rm $target_filename
 done
 
 echo "INFO: Remove $SAVE_DIR_CURRENT"
 
-rm -rf $SAVE_DIR_CURRENT
+rm -r $SAVE_DIR_CURRENT
 
 if [ -n "$CHECK_URL" ]; then
   curl -fsS --retry 3 $CHECK_URL && echo
